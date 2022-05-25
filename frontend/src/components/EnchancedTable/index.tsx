@@ -6,13 +6,12 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
-import { Data, Order } from "./interfaces";
-import { EnhancedTableHead } from "./EnhancedTableHead";
+import { Data, Order } from "./types";
+import { EnhancedTableHead } from "./EnchancedTableHead";
 import { EnhancedTableToolbar } from "./EnchancedToolbar";
 import { getComparator, stableSort } from "./utils/comparators";
 
@@ -119,7 +118,7 @@ export default function EnhancedTable() {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
+      {/* <Paper sx={{ width: "100%", mb: 2 }}> */}
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
@@ -199,7 +198,7 @@ export default function EnhancedTable() {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-      </Paper>
+      {/* </Paper> */}
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"

@@ -1,23 +1,18 @@
-const { Router } = require("express");
+import { Router } from "express";
 
-const {
-  listProductsController,
-} = require("../modules/sales/useCases/listProducts");
-
-const {
-  createProductController,
-} = require("../modules/sales/useCases/createProduct");
 
 const productsRoutes = Router();
 
-// /api/products
-productsRoutes.get("/", (request, response) => {
-  return listProductsController.handle(request, response);
-});
+
 
 // /api/products
-productsRoutes.post("/", (request, response) => {
-  return createProductController.handle(request, response);
+productsRoutes.get("/", ( response: Response) => {
+  return response.json("oi");
 });
 
-module.exports = { productsRoutes };
+// // /api/products
+// productsRoutes.post("/", (request: Request, response: Response) => {
+//   return createProductController.handle(request, response);
+// });
+
+export  {productsRoutes}

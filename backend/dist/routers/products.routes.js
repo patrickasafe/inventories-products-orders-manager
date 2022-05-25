@@ -1,14 +1,10 @@
 "use strict";
-const { Router } = require("express");
-const { listProductsController, } = require("../modules/sales/useCases/listProducts");
-const { createProductController, } = require("../modules/sales/useCases/createProduct");
-const productsRoutes = Router();
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.productsRoutes = void 0;
+const express_1 = require("express");
+const productsRoutes = (0, express_1.Router)();
+exports.productsRoutes = productsRoutes;
 // /api/products
-productsRoutes.get("/", (request, response) => {
-    return listProductsController.handle(request, response);
+productsRoutes.get("/", (response) => {
+    return response.json("oi");
 });
-// /api/products
-productsRoutes.post("/", (request, response) => {
-    return createProductController.handle(request, response);
-});
-module.exports = { productsRoutes };

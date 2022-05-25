@@ -1,25 +1,20 @@
-import express, { Request, Response, Router as TRouter } from 'express'
+import express, { Router as TRouter } from 'express'
 const router: TRouter = express.Router()
 
 const { productsRoutes } = require(`./products.routes`)
+const { inventoryRoutes } = require(`./inventory.routes`)
+
 
 router.use(`/products`, productsRoutes)
-
-router.get("/", (req: Request, res: Response) => {
-  const user = req.query.user;
-  res.send(`${user} !`);
-});
+router.use(`/inventory`, inventoryRoutes)
 
 
-//TO BE USED
-// interface User {
-//   username: string,
-//   password: string
-// }
+// router.get("/", (req: Request, res: Response) => {
+//   const user = req.query.user;
+//   res.send(`${user} !`);
+// });
 
-// interface Users {
-//   user: User
-// }
+
 
 // const users: Users | Object[] = [];
 
@@ -52,4 +47,4 @@ router.get("/", (req: Request, res: Response) => {
 
 // })
 
-module.exports = router
+export {router}
