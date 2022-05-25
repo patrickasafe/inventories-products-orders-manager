@@ -1,18 +1,13 @@
-import { Router } from "express";
-
+import { Response, Router } from "express";
+import products from "../fakeData/products.json"
 
 const productsRoutes = Router();
 
-
-
 // /api/products
-productsRoutes.get("/", ( response: Response) => {
-  return response.json("oi");
+productsRoutes.get("/", (_,response: Response) => {
+
+  return response.send(products)
+  // return response.json(products);
 });
 
-// // /api/products
-// productsRoutes.post("/", (request: Request, response: Response) => {
-//   return createProductController.handle(request, response);
-// });
-
-export  {productsRoutes}
+export { productsRoutes }

@@ -5,7 +5,7 @@
   "scripts": {
     "build": "npx tsc",
     "start": "npm install && node dist/server.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
+    "dev": "concurrently \"npx tsc --watch \" \"nodemon -q dist/server.js\"",
     "startdb": "npx sequelize db:create",
     "migrate": "npx sequelize db:migrate",
     "test": "echo \"Error: no test specified\" && exit 1"

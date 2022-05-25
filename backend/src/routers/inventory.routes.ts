@@ -14,4 +14,4 @@ const inventoryRoutes = Router();
 // inventoryRoutes.post("/", (request: Request, response: Response) => {
 //   return createProductController.handle(request, response);
 // });
-export  { inventoryRoutes}
+export { inventoryRoutes }

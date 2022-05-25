@@ -1,9 +1,7 @@
-import express, { Router as TRouter } from 'express'
-const router: TRouter = express.Router()
-
-const { productsRoutes } = require(`./products.routes`)
-const { inventoryRoutes } = require(`./inventory.routes`)
-
+import express from 'express'
+import { productsRoutes } from "./products.routes"
+import { inventoryRoutes } from "./inventory.routes"
+const router = express.Router()
 
 router.use(`/products`, productsRoutes)
 router.use(`/inventory`, inventoryRoutes)
@@ -47,4 +45,4 @@ router.use(`/inventory`, inventoryRoutes)
 
 // })
 
-export {router}
+export { router }
