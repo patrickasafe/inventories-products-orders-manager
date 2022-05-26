@@ -1,5 +1,5 @@
 import { Box, Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from "@mui/material";
-import { Data, EnhancedTableProps, HeadCell } from "./types";
+import { Data, EnhancedTableProps, HeadCell } from "./interfaces";
 import { visuallyHidden } from '@mui/utils';
 
 

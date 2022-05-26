@@ -7,7 +7,10 @@ interface HeadCell {
 
 interface EnhancedTableProps {
   numSelected: number;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
+  onRequestSort: (
+    event: React.MouseEvent<unknown>,
+    property: keyof Data
+  ) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   order: Order;
   orderBy: string;
@@ -27,3 +30,27 @@ interface Data {
 }
 
 type Order = "asc" | "desc";
+
+interface Product {
+  calories: number;
+  carbs: number;
+  fat: number;
+  name: string;
+  protein: number;
+}
+
+interface Products {
+  products: Product[];
+}
+
+interface InventoryItem {
+  id: number
+  name: string
+  ref: string
+}
+
+interface Inventory {
+  
+}
+
+export {}

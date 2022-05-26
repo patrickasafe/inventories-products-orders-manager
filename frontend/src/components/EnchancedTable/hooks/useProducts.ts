@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 
-import { axiosInstance } from "../../../../axiosInstance";
+import { axiosInstance } from "../../../axiosInstance";
 import { queryKeys } from "../../../../react-query/constants";
 import { Race as Data } from "../../../../types/types";
 
