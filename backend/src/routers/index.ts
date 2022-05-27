@@ -3,8 +3,8 @@ import { productsRoutes } from "./products.routes"
 import { inventoryRoutes } from "./inventory.routes"
 const router = express.Router()
 
-router.use(`/products`, productsRoutes)
-router.use(`/inventory`, inventoryRoutes)
+router.use(`/api/products`, productsRoutes)
+router.use(`/api/inventory`, inventoryRoutes)
 
 
 // router.get("/", (req: Request, res: Response) => {

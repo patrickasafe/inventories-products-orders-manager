@@ -1,36 +1,30 @@
 import { useQuery } from "react-query";
 
 import { axiosInstance } from "../../../axiosInstance";
-import { queryKeys } from "../../../../react-query/constants";
-import { Race as Data } from "../../../../types/types";
+import { queryKeys } from "../../../react-query/constants";
+import { Product } from "../utils/interfaces";
 
-async function getInventory(): Promise<UseData> {
-  const { data } = await axiosInstance.get("races/");
+async function getProducts(): Promise<Product[]> {
+  const { data } = await axiosInstance.get("products/");
   return data;
 }
 
 // add the interface of payload
-interface UseData {
-  count: number;
-  results: Data[];
-}
 
-interface useDataPayload {
-  races: Data[];
-}
+type useProductsPayload = Product[] | [];
 
-export function useData(): useDataPayload {
-  // for filtering staff by treatment
-  const treatData = (data: UseData): Data[] => {
-    const treatedData = data.results;
 
-    return treatedData;
-  };
+export function useProducts(): useProductsPayload {
+  // const treatData = (data: UseData): Data[] => {
+  //   const treatedData = data.results;
+
+  //   return treatedData;
+  // };
 
   const fallback: [] = [];
-  const { data = fallback } = useQuery(queryKeys.inventory, getInventory);
+  const { data = fallback } = useQuery(queryKeys.inventory, getProducts);
 
-  const data = treatData(data);
+  // const data = treatData(data);
 
-  return { races: data };
+  return [data];
 }

@@ -1,9 +1,7 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import EnchancedTable from '../components/EnchancedTable'
-import styles from '../styles/Home.module.css'
-
-
+import type { NextPage } from "next";
+import Head from "next/head";
+import EnchancedTable from "../components/EnchancedTable";
+import styles from "../styles/Home.module.css";
 
 const Inventory: NextPage = () => {
   return (
@@ -18,10 +16,8 @@ const Inventory: NextPage = () => {
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
       </Head>
-      <EnchancedTable>
-        
-      </EnchancedTable>
-      
-    </div>)
-}
-export default Inventory
+      <EnchancedTable />
+    </div>
+  );
+};
+export default Inventory;

@@ -9,5 +9,5 @@ const products_routes_1 = require("./products.routes");
 const inventory_routes_1 = require("./inventory.routes");
 const router = express_1.default.Router();
 exports.router = router;
-router.use(`/products`, products_routes_1.productsRoutes);
-router.use(`/inventory`, inventory_routes_1.inventoryRoutes);
+router.use(`/api/products`, products_routes_1.productsRoutes);
+router.use(`/api/inventory`, inventory_routes_1.inventoryRoutes);

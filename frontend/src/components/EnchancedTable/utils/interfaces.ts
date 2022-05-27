@@ -1,15 +1,15 @@
 interface HeadCell {
   disablePadding: boolean;
-  id: keyof Data;
+  id: keyof Product;
   label: string;
   numeric: boolean;
 }
 
-interface EnhancedTableProps {
+export interface EnhancedTableProps {
   numSelected: number;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
-    property: keyof Data
+    property: keyof Product
   ) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   order: Order;
@@ -17,29 +17,22 @@ interface EnhancedTableProps {
   rowCount: number;
 }
 
-interface EnhancedTableToolbarProps {
+export interface EnhancedTableToolbarProps {
   numSelected: number;
 }
 
-export interface Data {
+export interface Product {
   id: number;
   name?: string;
   ref?: string;
   cost?: number;
   price?: number;
   amount?: number;
-  location?:string;
+  location?: string;
 }
 
 export type Order = "asc" | "desc";
 
-interface Product {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
-}
 
 interface Products {
   products: Product[];
@@ -52,7 +45,7 @@ interface InventoryItem {
 }
 
 interface Inventory {
-  
+
 }
 
-export {}
+export { }
