@@ -21,15 +21,17 @@ interface EnhancedTableToolbarProps {
   numSelected: number;
 }
 
-interface Data {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
+export interface Data {
+  id: number;
+  name?: string;
+  ref?: string;
+  cost?: number;
+  price?: number;
+  amount?: number;
+  location?:string;
 }
 
-type Order = "asc" | "desc";
+export type Order = "asc" | "desc";
 
 interface Product {
   calories: number;
