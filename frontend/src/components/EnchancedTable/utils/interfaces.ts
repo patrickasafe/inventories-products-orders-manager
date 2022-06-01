@@ -1,4 +1,4 @@
-interface HeadCell {
+export interface HeadCell {
   disablePadding: boolean;
   id: keyof Product;
   label: string;

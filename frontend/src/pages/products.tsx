@@ -3,12 +3,11 @@ import Head from "next/head";
 import EnchancedTable from "../components/EnchancedTable";
 import styles from "../styles/Home.module.css";
 
-import data from "../components/EnchancedTable/utils/MOCK_DATA.json";
 import { useProducts } from "../components/EnchancedTable/hooks/useProducts";
+import { CreateProduct } from "../components/CreateProduct";
 
 const Inventory: NextPage = () => {
-  const [product] = useProducts();
-  console.log(product);
+  const [products] = useProducts();
 
   return (
     <div className={styles.container}>
@@ -22,7 +21,8 @@ const Inventory: NextPage = () => {
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
       </Head>
-      <EnchancedTable data={data} />
+      <EnchancedTable data={products} />
+      <CreateProduct></CreateProduct>
     </div>
   );
 };
