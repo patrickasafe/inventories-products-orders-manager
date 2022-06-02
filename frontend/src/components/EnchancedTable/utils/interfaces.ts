@@ -34,11 +34,11 @@ export interface Product {
 export type Order = "asc" | "desc";
 
 
-interface Products {
+export interface Products {
   products: Product[];
 }
 
-interface InventoryItem {
+export interface InventoryItem {
   id: number
   name: string
   ref: string

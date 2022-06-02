@@ -1,10 +1,14 @@
-import { Button, FormControl, InputLabel, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
-import { HeadCell } from "../EnchancedTable/utils/interfaces";
+import { HeadCell, Product } from "../EnchancedTable/utils/interfaces";
 
-const newProduct: {} = {};
-
-export const CreateProduct = () => {
+export const CreateProduct = ({
+  productsList,
+  setProductsList,
+}: {
+  productsList: [];
+  setProductsList: React.Dispatch<React.SetStateAction<[]>>;
+}) => {
   const [newProductName, setNewProductName] = useState("");
   const [newProductRef, setNewProductRef] = useState("");
   const [newProductCost, setNewProductCost] = useState(0);
@@ -55,21 +59,27 @@ export const CreateProduct = () => {
       <Button
         variant="contained"
         onClick={() => {
-          console.log(newProductName);
-          console.log(newProductRef);
-          console.log(newProductCost);
-          console.log(newProductPrice);
+          const newProduct: Product = {
+            id: productsList[productsList.length -1]['id'] + 1,
+            name: newProductName,
+            ref: newProductRef,
+            cost: newProductCost,
+            price: newProductPrice,
+          };
+          const newProductsList = [...productsList, newProduct];
+          setProductsList(newProductsList);
         }}
       >
-        Criar Produto
+        Create Product
       </Button>
 
-      {headCells.map((headCell) => {
+      {headCells.map((headCell, index) => {
         return (
           <TextField
             onChange={(e) => {
               headCell.setState(e.target.value);
             }}
+            id={`newProductInput${index}`}
             key={headCell.id}
             sx={{ marginInlineStart: 2 }}
             label={headCell.label}

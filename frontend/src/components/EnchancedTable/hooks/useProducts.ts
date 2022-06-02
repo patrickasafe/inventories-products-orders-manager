@@ -1,3 +1,4 @@
+import React from "react";
 import { useQuery } from "react-query";
 
 import { axiosInstance } from "../../../axiosInstance";
@@ -12,12 +13,18 @@ async function getProducts(): Promise<Product[]> {
 // interface of payload
 type useProductsPayload = Product[] | [];
 
-
-export function useProducts(): useProductsPayload {
-
-
+export function useProducts(): [
+  useProductsPayload,
+  React.Dispatch<React.SetStateAction<Product[]>>
+] {
   const fallback: [] = [];
   const { data = fallback } = useQuery(queryKeys.inventory, getProducts);
+  const [products, setProducts] = React.useState(data);
 
-  return [data];
+  React.useEffect(() => {
+    setProducts(data)
+
+  }, [data])
+
+  return [products, setProducts];
 }

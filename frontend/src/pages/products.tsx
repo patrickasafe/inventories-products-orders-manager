@@ -4,10 +4,9 @@ import EnchancedTable from "../components/EnchancedTable";
 import styles from "../styles/Home.module.css";
 
 import { useProducts } from "../components/EnchancedTable/hooks/useProducts";
-import { CreateProduct } from "../components/CreateProduct";
 
 const Inventory: NextPage = () => {
-  const [products] = useProducts();
+  const [products, setProducts] = useProducts();
 
   return (
     <div className={styles.container}>
@@ -21,8 +20,7 @@ const Inventory: NextPage = () => {
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
       </Head>
-      <EnchancedTable data={products} />
-      <CreateProduct></CreateProduct>
+      <EnchancedTable data={products} setData={setProducts} />
     </div>
   );
 };

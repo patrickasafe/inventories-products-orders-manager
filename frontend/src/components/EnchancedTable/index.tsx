@@ -14,10 +14,18 @@ import { Product, Order } from "./utils/interfaces";
 import { EnhancedTableHead } from "./EnchancedTableHead";
 import { EnhancedTableToolbar } from "./EnchancedToolbar";
 import { getComparator, stableSort } from "./utils/comparators";
+import { CreateProduct } from "../CreateProduct";
 
-export default function EnhancedTable(untreatedData) {
-  const { data } = untreatedData;
+export default function EnhancedTable({
+  data,
+  setData,
+}: {
+  data: Product[];
+  setData: React.Dispatch<React.SetStateAction<Product[]>>;
+}) {
+  // console.log(data)
   const rows = data;
+  const setRows = setData;
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Product>("name");
   const [selected, setSelected] = React.useState<readonly string[]>([]);
@@ -114,7 +122,7 @@ export default function EnhancedTable(untreatedData) {
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.name)}
+                    onClick={(e) => handleClick(e, row.name)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
@@ -170,6 +178,10 @@ export default function EnhancedTable(untreatedData) {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      <CreateProduct
+        productsList={rows}
+        setProductsList={setRows}
+      ></CreateProduct>
     </Box>
   );
 }
