@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 from pathlib import Path
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
-dotenv_path = Path('../.env')
-load_dotenv(dotenv_path=dotenv_path)
+load_dotenv(find_dotenv(filename='.env'))
+
+print(os.environ.get('USER'))
+print(os.environ.get('PASSWORD'))
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-k1*izen*)&yqgfz=r8-pp2+y57v!eok!m45dm2*r^9xv(c@5(p'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'backend_api',
+
 ]
 
 MIDDLEWARE = [
@@ -84,17 +88,17 @@ DATABASES = {
 
     'default': {
 
-        'ENGINE': os.getenv('ENGINE'),
+        'ENGINE': os.getenv('ENGINE', 'django.db.backends.postgresql_psycopg2'),
 
-        'NAME': os.getenv('NAME'),
+        'NAME': os.getenv('NAME', 'postgres'),
 
-        'USER': os.getenv('USER'),
+        'USER': 'postgres',
 
-        'PASSWORD': os.getenv('PASSWORD'),
+        'PASSWORD': os.getenv('PASSWORD', 'postgres'),
 
-        'HOST': os.getenv('HOST'),
+        'HOST': os.getenv('HOST', 'localhost'),
 
-        'PORT': os.getenv('PORT'),
+        'PORT': os.getenv('PORT', '5432'),
 
     }
 }
