@@ -11,13 +11,19 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 from pathlib import Path
 import os
-from dotenv import load_dotenv, find_dotenv
+from django.core.exceptions import ImproperlyConfigured
 
-load_dotenv(find_dotenv(filename='.env'))
 
-print(os.environ.get('USER'))
-print(os.environ.get('PASSWORD'))
-
+def get_env_variable(var_name, default):
+    '''Get the environment variable, use default or return exception.'''
+    try:
+        if var_name:
+            return os.environ[var_name]
+        else:
+            return default
+    except KeyError:
+        error_msg = f'Set the {var_name} environment variable'
+        raise ImproperlyConfigured(error_msg)
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -35,22 +41,27 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-# Application definition
-
-INSTALLED_APPS = [
+##Apps that came with Django
+DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'backend_api',
-
 ]
 
-MIDDLEWARE = [
+##Apps added by me
+CUSTOM_APPS = [
+    'rest_framework',
+    'backend_api',
+]
+
+# Application definition
+INSTALLED_APPS = DEFAULT_APPS + CUSTOM_APPS
+
+
+DEFAULT_MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -59,6 +70,20 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CUSTOM_MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
+
+MIDDLEWARE = CUSTOM_MIDDLEWARE + DEFAULT_MIDDLEWARE
+
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -88,17 +113,17 @@ DATABASES = {
 
     'default': {
 
-        'ENGINE': os.getenv('ENGINE', 'django.db.backends.postgresql_psycopg2'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': os.getenv('NAME', 'postgres'),
+        'NAME': get_env_variable('NAME', 'postgres'),
 
-        'USER': 'postgres',
+        'USER': get_env_variable('USER', 'postgres'),
 
-        'PASSWORD': os.getenv('PASSWORD', 'postgres'),
+        'PASSWORD': get_env_variable('PASSWORD', 'postgres'),
 
-        'HOST': os.getenv('HOST', 'localhost'),
+        'HOST': get_env_variable('HOST', 'localhost'),
 
-        'PORT': os.getenv('PORT', '5432'),
+        'PORT': get_env_variable('PORT', '5432'),
 
     }
 }
