@@ -31,6 +31,10 @@ export interface Product {
   location?: string;
 }
 
+export interface NewProduct extends Omit< Product, 'id'> {
+  
+}
+
 export type Order = "asc" | "desc";
 
 

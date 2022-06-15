@@ -2,6 +2,7 @@ import { Button, TextField } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
 import {
   HeadCell,
+  NewProduct,
   Product,
 } from "../EnchancedTable/utils/interfaces";
 import useCreateProduct from "./hooks/useCreateProduct";
@@ -21,8 +22,8 @@ export const CreateProduct = ({
   const [newProductPrice, setNewProductPrice] = useState(0);
   const mutate = useCreateProduct()
 
-  const newProduct: Product = {
-    id: productsList.length + 1,
+  const newProduct: NewProduct = {
+    // id: productsList.length + 1,
     name: newProductName,
     ref: newProductRef,
     cost: newProductCost,
@@ -31,7 +32,7 @@ export const CreateProduct = ({
 
   interface NewHeadCell extends HeadCell {
     state?: string | number;
-    setState?: Dispatch<SetStateAction<string | number>>;
+    setState?: Dispatch<SetStateAction<string>> | Dispatch<SetStateAction<number>>;
   }
 
   const headCells: readonly NewHeadCell[] = [
@@ -75,8 +76,8 @@ export const CreateProduct = ({
         variant="contained"
         onClick={() => {
           mutate(newProduct);
-          const newProductsList: Array<Product> = [...productsList, newProduct];
-          setProductsList(newProductsList);
+          // const newProductsList: Array<Product> = [...productsList, newProduct];
+          // setProductsList(products);
         }}
       >
         Create Product
