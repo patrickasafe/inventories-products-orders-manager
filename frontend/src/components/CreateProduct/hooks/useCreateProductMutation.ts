@@ -7,7 +7,7 @@ async function postProduct(data: Product): Promise<void> {
   await axiosInstance.post<Product>("products/", data);
 }
 
-export default function useCreateProduct(): UseMutateFunction<
+export default function useCreateProductMutation(): UseMutateFunction<
   void,
   unknown,
   Product,

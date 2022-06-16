@@ -1,6 +1,7 @@
 import { alpha, IconButton, Toolbar, Tooltip, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import { EnhancedTableToolbarProps } from "./utils/interfaces";
 
 
 export const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {

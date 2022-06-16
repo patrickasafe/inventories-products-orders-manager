@@ -1,101 +1,50 @@
 import { Button, TextField } from "@mui/material";
-import { Dispatch, SetStateAction, useState } from "react";
-import {
-  HeadCell,
-  NewProduct,
-  Product,
-} from "../EnchancedTable/utils/interfaces";
-import useCreateProduct from "./hooks/useCreateProduct";
+import useCreateProductMutation from "./hooks/useCreateProductMutation";
+import { formsAttributes } from "./hooks/CreateProduct.config";
 
-export const CreateProduct = ({
-  productsList,
-  setProductsList,
-}: {
-  productsList: [];
-  setProductsList: React.Dispatch<React.SetStateAction<[]>>;
-}) => {
-  
+import useNewProduct from "./hooks/useNewProduct";
+import { Dispatch, SetStateAction } from "react";
+import { FormAttribute, NewProduct } from "../EnchancedTable/utils/interfaces";
 
-  const [newProductName, setNewProductName] = useState("");
-  const [newProductRef, setNewProductRef] = useState("");
-  const [newProductCost, setNewProductCost] = useState(0);
-  const [newProductPrice, setNewProductPrice] = useState(0);
-  const mutate = useCreateProduct()
+export const CreateProductForms = () => {
 
-  const newProduct: NewProduct = {
-    // id: productsList.length + 1,
-    name: newProductName,
-    ref: newProductRef,
-    cost: newProductCost,
-    price: newProductPrice,
+  const [newProduct, setNewProduct]: [NewProduct, Dispatch<SetStateAction<NewProduct>>] = useNewProduct()
+  const mutate = useCreateProductMutation()
+
+  const handleChange = (e: React.FormEvent<HTMLInputElement>, id: string): void => {
+    const tempNewProduct = newProduct
+    tempNewProduct[id] = e.currentTarget.value
+    setNewProduct(tempNewProduct);
+    console.log(tempNewProduct)
   }
 
-  interface NewHeadCell extends HeadCell {
-    state?: string | number;
-    setState?: Dispatch<SetStateAction<string>> | Dispatch<SetStateAction<number>>;
+  const handleSubmit = (): void => {
+    mutate(newProduct);
   }
 
-  const headCells: readonly NewHeadCell[] = [
-    {
-      id: "name",
-      numeric: false,
-      disablePadding: true,
-      label: "Product Name",
-      state: newProductName,
-      setState: setNewProductName,
-    },
-    {
-      id: "ref",
-      numeric: false,
-      disablePadding: false,
-      label: "Reference",
-      state: newProductRef,
-      setState: setNewProductRef,
-    },
-    {
-      id: "cost",
-      numeric: true,
-      disablePadding: false,
-      label: "Cost Price ($)",
-      state: newProductCost,
-      setState: setNewProductCost,
-    },
-    {
-      id: "price",
-      numeric: true,
-      disablePadding: false,
-      label: "Selling Price ($)",
-      state: newProductPrice,
-      setState: setNewProductPrice,
-    },
-  ];
 
   return (
     <>
       <Button
         variant="contained"
-        onClick={() => {
-          mutate(newProduct);
-          // const newProductsList: Array<Product> = [...productsList, newProduct];
-          // setProductsList(products);
-        }}
+        onClick={handleSubmit}
       >
         Create Product
       </Button>
 
-      {headCells.map((headCell, index) => {
+      {formsAttributes.map((formAttribute: FormAttribute, index: number) => {
         return (
           <TextField
-            onChange={(e) => {
-              headCell.setState(e.target.value);
-            }}
+            onChange={(e) => handleChange(e, formAttribute.id)}
             id={`newProductInput${index}`}
-            key={headCell.id}
+            key={formAttribute.id}
             sx={{ marginInlineStart: 2 }}
-            label={headCell.label}
+            label={formAttribute.label}
+            value={newProduct[index]}
           ></TextField>
         );
       })}
+
     </>
   );
 };

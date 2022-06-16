@@ -1,8 +1,17 @@
-export interface HeadCell {
-  disablePadding: boolean;
-  id: keyof Product;
+import { Dispatch, SetStateAction } from "react";
+
+export interface FormAttribute {
+  id: string;
   label: string;
   numeric: boolean;
+}
+
+export interface HeadCell extends FormAttribute {
+  disablePadding: boolean;
+}
+
+export interface FormAttributeWithStates extends FormAttribute {
+  setState: Dispatch<SetStateAction<string>> | Dispatch<SetStateAction<number>>;
 }
 
 export interface EnhancedTableProps {
@@ -31,8 +40,8 @@ export interface Product {
   location?: string;
 }
 
-export interface NewProduct extends Omit< Product, 'id'> {
-  
+export interface NewProduct extends Omit<Product, 'id'> {
+
 }
 
 export type Order = "asc" | "desc";
@@ -48,8 +57,5 @@ export interface InventoryItem {
   ref: string
 }
 
-interface Inventory {
-
-}
 
 export { }

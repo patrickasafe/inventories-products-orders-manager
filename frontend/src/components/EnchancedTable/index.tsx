@@ -14,7 +14,7 @@ import { Product, Order } from "./utils/interfaces";
 import { EnhancedTableHead } from "./EnchancedTableHead";
 import { EnhancedTableToolbar } from "./EnchancedToolbar";
 import { getComparator, stableSort } from "./utils/comparators";
-import { CreateProduct } from "../CreateProduct";
+import { CreateProductForms } from "../CreateProduct";
 
 export default function EnhancedTable({
   data,
@@ -178,10 +178,10 @@ export default function EnhancedTable({
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
-      <CreateProduct
+      <CreateProductForms
         productsList={rows}
         setProductsList={setRows}
-      ></CreateProduct>
+      ></CreateProductForms>
     </Box>
   );
 }
