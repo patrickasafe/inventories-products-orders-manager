@@ -1,14 +1,13 @@
 import { Button, TextField } from "@mui/material";
+
+import { FormAttribute } from "../EnchancedTable/utils/interfaces";
 import useCreateProductMutation from "./hooks/useCreateProductMutation";
 import { formsAttributes } from "./hooks/CreateProduct.config";
-
 import useNewProduct from "./hooks/useNewProduct";
-import { Dispatch, SetStateAction } from "react";
-import { FormAttribute, NewProduct } from "../EnchancedTable/utils/interfaces";
 
 export const CreateProductForms = () => {
 
-  const [newProduct, setNewProduct]: [NewProduct, Dispatch<SetStateAction<NewProduct>>] = useNewProduct()
+  const [newProduct, setNewProduct]  = useNewProduct()
   const mutate = useCreateProductMutation()
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>, id: string): void => {
@@ -32,7 +31,7 @@ export const CreateProductForms = () => {
         Create Product
       </Button>
 
-      {formsAttributes.map((formAttribute: FormAttribute, index: number) => {
+      {formsAttributes.map((formAttribute, index) => {
         return (
           <TextField
             onChange={(e) => handleChange(e, formAttribute.id)}
@@ -41,7 +40,7 @@ export const CreateProductForms = () => {
             sx={{ marginInlineStart: 2 }}
             label={formAttribute.label}
             value={newProduct[index]}
-          ></TextField>
+          />
         );
       })}
 

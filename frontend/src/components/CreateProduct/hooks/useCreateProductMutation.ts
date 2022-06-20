@@ -1,7 +1,10 @@
-import { UseMutateFunction, useMutation } from "react-query";
+import { UseMutateFunction, useMutation, useQueryClient } from "react-query";
+import { toast, TypeOptions } from "react-toastify";
 
 import { axiosInstance } from "../../../axiosInstance";
 import { Product } from "../../EnchancedTable/utils/interfaces";
+import { queryKeys } from "../../../react-query/constants";
+
 
 async function postProduct(data: Product): Promise<void> {
   await axiosInstance.post<Product>("products/", data);
@@ -13,22 +16,19 @@ export default function useCreateProductMutation(): UseMutateFunction<
   Product,
   unknown
 > {
-  const { mutate } = useMutation((product: Product) => postProduct(product));
+  // const toast = use
+  const queryClient = useQueryClient()
+
+  const { mutate } = useMutation((product: Product) => postProduct(product), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([queryKeys.products])
+      showNotification({
+        enabled: true,
+        type: toast.TYPE.SUCCESS,
+        message: "Sucessfully created a product"
+      });
+    }
+  });
 
   return mutate;
 }
-
-// interface of payload
-
-// export function useCreateProduct() {
-//   const fallback: [] = [];
-//   const { data = fallback } = useQuery(queryKeys.products, postProduct);
-//   const [createProduct, setCreateProduct] = React.useState(data);
-
-//   React.useEffect(() => {
-//     setCreateProduct(data)
-
-//   }, [data])
-
-//   return [createProduct, setCreateProduct];
-// }

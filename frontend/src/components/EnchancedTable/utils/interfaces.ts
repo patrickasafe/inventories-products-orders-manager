@@ -6,11 +6,13 @@ export interface FormAttribute {
   numeric: boolean;
 }
 
-export interface HeadCell extends FormAttribute {
+
+export type HeadCell = FormAttribute & {
   disablePadding: boolean;
 }
 
-export interface FormAttributeWithStates extends FormAttribute {
+
+export type FormAttributeWithStates = FormAttribute & {
   setState: Dispatch<SetStateAction<string>> | Dispatch<SetStateAction<number>>;
 }
 
@@ -40,9 +42,7 @@ export interface Product {
   location?: string;
 }
 
-export interface NewProduct extends Omit<Product, 'id'> {
-
-}
+export type NewProduct = Omit<Product, 'id'>
 
 export type Order = "asc" | "desc";
 

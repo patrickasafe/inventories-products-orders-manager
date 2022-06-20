@@ -6,6 +6,7 @@ import styles from "../styles/Home.module.css";
 const Inventory: NextPage = () => {
   return (
     <div className={styles.container}>
+      
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
