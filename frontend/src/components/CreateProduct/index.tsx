@@ -1,6 +1,5 @@
 import { Button, TextField } from "@mui/material";
 
-import { FormAttribute } from "../EnchancedTable/utils/interfaces";
 import useCreateProductMutation from "./hooks/useCreateProductMutation";
 import { formsAttributes } from "./hooks/CreateProduct.config";
 import useNewProduct from "./hooks/useNewProduct";

@@ -52,6 +52,29 @@ class ProductCreate(APIView):
             return Response(serializer.errors)
 
 
+class ProductDeleteRequest(APIView):
+    def delete_product_by_pk(self, pk):
+        try:
+            Product.objects.filter(id=pk).delete()
+        except:
+            return Response({
+                'error': 'Product does not exist'
+            }, status=status.HTTP_404_NOT_FOUND)
+
+    def post(self, request):
+        deletionArray = request.data
+        response = {}
+        for element in deletionArray:
+            if(Product.objects.filter(id=element)):
+                self.delete_product_by_pk(pk=element)
+                response['id:'+str(element) +
+                         '_report'] = 'error: product deleted successfully'
+            else:
+                response['id:'+str(
+                    element)+'_report'] = 'error: the product could not be deleted, please check if the id is correct'
+        return Response(response)
+
+
 class ProductDetail(APIView):
     def get_product_by_pk(self, pk):
         try:
