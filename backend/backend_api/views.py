@@ -1,35 +1,10 @@
-# from rest_framework.decorators import api_view
-
-# # from django.shortcuts import render
-
-# # Create your views here.
-
-
-# @api_view(['GET'])
-# def product_list(request):
-
-
-# @api_view(['POST'])
-# def product_create(request):
-
-
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def product(request, pk):
-
-
-#     if request.method == 'GET':
-
-
-#     if request.method == 'DELETE':
-#         product.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
 from rest_framework.views import APIView
 from backend_api.models import Product
 from backend_api.serializer import ProductSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 class ProductList(APIView):
@@ -39,13 +14,15 @@ class ProductList(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        return Response({'hello': 'friend'})
-
+        serializer = ProductSerializer(data=request.data)
+        # if serializer.is_valid():
+            
 
 class ProductCreate(APIView):
     def post(self, request):
         serializer = ProductSerializer(data=request.data)
         if serializer.is_valid():
+            print(serializer)
             serializer.save()
             return Response(serializer.data)
         else:
@@ -56,6 +33,28 @@ class ProductDeleteRequest(APIView):
     def delete_product_by_pk(self, pk):
         try:
             Product.objects.filter(id=pk).delete()
+        except:
+            return Response({
+                'error': 'Product does not exist'
+            }, status=status.HTTP_404_NOT_FOUND)
+
+    def post(self, request):
+        deletionArray = request.data
+        response = {}
+        for element in deletionArray:
+            if(Product.objects.filter(id=element)):
+                self.delete_product_by_pk(pk=element)
+                response['id:'+str(element) +
+                         '_report'] = 'error: product deleted successfully'
+            else:
+                response['id:'+str(
+                    element)+'_report'] = 'error: the product could not be deleted, please check if the id is correct'
+        return Response(response)
+
+class ProductSoftDelete(APIView):
+    def delete_product_by_pk(self, pk):
+        try:
+            Product.objects.filter(id=pk).bulk_update()
         except:
             return Response({
                 'error': 'Product does not exist'
