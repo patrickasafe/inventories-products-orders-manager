@@ -41,7 +41,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-##Apps that came with Django
+# Apps that came with Django
 DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,7 +51,7 @@ DEFAULT_APPS = [
     'django.contrib.staticfiles',
 ]
 
-##Apps added by me
+# Apps added by me
 CUSTOM_APPS = [
     'rest_framework',
     'backend_api',

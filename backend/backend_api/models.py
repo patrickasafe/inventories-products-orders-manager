@@ -36,3 +36,15 @@ class Product(TimeStampedModel):
 
     def __str__(self):
         return str(self.id)
+
+class Stock(TimeStampedModel):
+    """
+    A class model for Products.
+    """
+    name = models.CharField(max_length=200, verbose_name='Name')
+    ref = models.CharField(max_length=9, verbose_name='Reference')
+    address = models.CharField(max_length=200, verbose_name='Address')
+
+
+    def __str__(self):
+        return str(self.id)
