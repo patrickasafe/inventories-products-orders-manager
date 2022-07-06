@@ -59,6 +59,7 @@ class ProductSoftDelete(APIView):
             return Response({
                 'error': 'Product does not exist'
             }, status=status.HTTP_404_NOT_FOUND)
+            # TODO ADD BULK UPDATE TO SOFTDELETE ITEMS ON TABLE
 
     def post(self, request):
         deletionArray = request.data

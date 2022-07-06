@@ -1,4 +1,3 @@
-import string
 import random
 
 
@@ -20,9 +19,9 @@ class Generator:
         return float_number_generated
 
     @classmethod
-    def random_string_generator(cls, length):
+    def random_string_generator(cls, length, options_array):
         string_generated = ''.join(random.SystemRandom().choice(
-            string.ascii_uppercase) for _ in range(length))
+            options_array) for _ in range(length))
         return string_generated
 
     @classmethod
