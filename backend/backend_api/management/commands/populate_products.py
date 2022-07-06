@@ -30,8 +30,8 @@ class Command(BaseCommand, Generator):
         Faker.seed(10)
         for _ in range(products_quantity):
             name = self.random_product_name_generator()
-            ref = '{}" "{}'.format(self.random_string_generator(3),
-                                   random.randrange(000000, 999999))
+            ref = '{}{}'.format(self.random_string_generator(3),
+                                random.randrange(000000, 999999))
             cost = '{}'.format(self.random_float_generator(1, 99, 2))
             price = '{}'.format(self.random_float_generator(101, 199, 2))
             deleted_at = None

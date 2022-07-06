@@ -27,6 +27,6 @@ class Generator:
 
     @classmethod
     def random_product_name_generator(cls):
-        random_product_name = '{}" "{}'.format(random.SystemRandom().choice(
+        random_product_name = '{} {}'.format(random.SystemRandom().choice(
             cls.fruits), random.SystemRandom().choice(cls.fruits_complement))
         return random_product_name
