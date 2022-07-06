@@ -26,9 +26,8 @@ class TimeStampedModel(models.Model):
 
 
 class Product(TimeStampedModel):
-    """
-    A class model for Products.
-    """
+    """A class model for Products."""
+
     name = models.CharField(max_length=200, verbose_name='Name')
     ref = models.CharField(max_length=9, verbose_name='Reference')
     cost = models.FloatField(verbose_name='Cost Price')
@@ -37,14 +36,23 @@ class Product(TimeStampedModel):
     def __str__(self):
         return str(self.id)
 
-class Stock(TimeStampedModel):
-    """
-    A class model for Products.
-    """
-    name = models.CharField(max_length=200, verbose_name='Name')
-    ref = models.CharField(max_length=9, verbose_name='Reference')
-    address = models.CharField(max_length=200, verbose_name='Address')
 
+class StockPlace(TimeStampedModel):
+    """A class model for Stock Place."""
+
+    name = models.CharField(max_length=200, verbose_name='Name')
+    ref = models.CharField(max_length=6, verbose_name='Reference', default='')
+    address = models.CharField(
+        max_length=200, verbose_name='Address')
 
     def __str__(self):
         return str(self.id)
+
+
+class Stock(TimeStampedModel):
+    """A class model for Stock."""
+    stock_place = models.ForeignKey(
+        StockPlace, on_delete=models.CASCADE, verbose_name='Stock Place', related_name='stocks_place')
+    products = models.ForeignKey(
+        Product, on_delete=models.DO_NOTHING, related_name='products', verbose_name='Products')
+    quantity = models.IntegerField(verbose_name='Quantity')

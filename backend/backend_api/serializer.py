@@ -1,7 +1,7 @@
 from django.forms import ValidationError
 from rest_framework import serializers
 from backend_api.validators import validate_name
-from backend_api.models import Product, Stock
+from backend_api.models import Product, StockPlace
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -18,7 +18,8 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_description(self, data):
         return "This crop is called " + data['name'] + ", it costs $" + str(data.cost) + " and is sold for $" + (data.price)
 
-class StockSerializer(serializers.ModelSerializer):
+
+class StockPlaceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Stock
+        model = StockPlace
         fields = "__all__"
