@@ -1,7 +1,7 @@
 from django.forms import ValidationError
 from rest_framework import serializers
 from backend_api.validators import validate_name
-from backend_api.models import Product, StockPlace
+from backend_api.models import Product, Inventory
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -21,5 +21,5 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class StockPlaceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = StockPlace
+        model = Inventory
         fields = "__all__"

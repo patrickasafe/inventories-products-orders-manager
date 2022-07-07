@@ -1,5 +1,5 @@
 from django.contrib import admin
-from backend_api.models import Product, StockPlace, Stock
+from backend_api.models import Product, Inventory, ProductInventory
 
 
 class Products(admin.ModelAdmin):
@@ -9,19 +9,19 @@ class Products(admin.ModelAdmin):
     list_per_page = 20
 
 
-class StocksPlaces(admin.ModelAdmin):
+class Inventories(admin.ModelAdmin):
     list_display = ('id', 'name', 'ref', 'address')
     list_display_links = ('id', 'name')
     search_fields = ('name',)
     list_per_page = 20
 
 
-class Stocks(admin.ModelAdmin):
-    list_display = ('id', 'stock_place', 'quantity')
-    list_display_links = ('id', 'quantity')
+class ProductsInventories(admin.ModelAdmin):
+    list_display = ('inventory', 'product', 'quantity')
+    # list_display_links = ('id',)
     list_per_page = 20
 
 
 admin.site.register(Product, Products)
-admin.site.register(StockPlace, StocksPlaces)
-admin.site.register(Stock, Stocks)
+admin.site.register(Inventory, Inventories)
+admin.site.register(ProductInventory, ProductsInventories)

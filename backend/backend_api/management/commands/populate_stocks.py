@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand, CommandError
 from faker import Faker
 import faker
 
-from backend_api.models import Stock, StockPlace
+from backend_api.models import ProductInventory, Inventory
 from backend_api.management.commands.common.service.generator import Generator
 
 
@@ -37,6 +37,6 @@ class Command(BaseCommand, Generator):
             cost = '{}'.format(self.random_float_generator(1, 99, 2))
             price = '{}'.format(self.random_float_generator(101, 199, 2))
             deleted_at = None
-            p = Stock(name=name, ref=ref, cost=cost,
-                        price=price, deleted_at=deleted_at)
+            p = ProductInventory(name=name, ref=ref, cost=cost,
+                                 price=price, deleted_at=deleted_at)
             p.save()

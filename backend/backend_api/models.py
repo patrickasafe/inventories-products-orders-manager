@@ -37,22 +37,25 @@ class Product(TimeStampedModel):
         return str(self.id)
 
 
-class StockPlace(TimeStampedModel):
+class Inventory(TimeStampedModel):
     """A class model for Stock Place."""
 
     name = models.CharField(max_length=200, verbose_name='Name')
-    ref = models.CharField(max_length=6, verbose_name='Reference', default='')
+    ref = models.CharField(max_length=6, verbose_name='Reference')
     address = models.CharField(
         max_length=200, verbose_name='Address')
+    products = models.ManyToManyField(Product,
+                                      related_name='inventories', through="ProductInventory", verbose_name='Products')
 
     def __str__(self):
         return str(self.id)
 
 
-class Stock(TimeStampedModel):
+class ProductInventory(TimeStampedModel):
     """A class model for Stock."""
-    stock_place = models.ForeignKey(
-        StockPlace, on_delete=models.CASCADE, verbose_name='Stock Place', related_name='stocks_place')
-    products = models.ForeignKey(
-        Product, on_delete=models.DO_NOTHING, related_name='products', verbose_name='Products')
-    quantity = models.IntegerField(verbose_name='Quantity')
+    inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE,
+                                  verbose_name='Inventory', related_name='product_inventory')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                related_name='product_inventory', verbose_name='Product')
+    quantity = models.IntegerField(
+        verbose_name='Product quantity at Inventory')
