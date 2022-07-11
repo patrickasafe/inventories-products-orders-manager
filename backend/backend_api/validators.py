@@ -1,2 +1,7 @@
-def validate_name(name):
-  return name.isalpha()
+import string
+
+
+def validate_name(name: string) -> bool:
+    '''Validate if name contains alphanumerics'''
+
+    return not name.isalpha()
