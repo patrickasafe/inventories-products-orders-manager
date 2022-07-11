@@ -1,5 +1,5 @@
 from django.contrib import admin
-from backend_api.models import Product, Inventory, ProductInventory
+from backend_api.models import Product, Inventory, InventoryProduct
 
 
 class Products(admin.ModelAdmin):
@@ -24,4 +24,4 @@ class ProductsInventories(admin.ModelAdmin):
 
 admin.site.register(Product, Products)
 admin.site.register(Inventory, Inventories)
-admin.site.register(ProductInventory, ProductsInventories)
+admin.site.register(InventoryProduct, ProductsInventories)
