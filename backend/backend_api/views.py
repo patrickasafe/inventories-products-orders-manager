@@ -3,8 +3,6 @@ from backend_api.models import Product
 from backend_api.serializer import ProductSerializer
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.authentication import BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
 
 
 class ProductList(APIView):
@@ -16,7 +14,7 @@ class ProductList(APIView):
     def post(self, request):
         serializer = ProductSerializer(data=request.data)
         # if serializer.is_valid():
-            
+
 
 class ProductCreate(APIView):
     def post(self, request):
@@ -50,6 +48,7 @@ class ProductDeleteRequest(APIView):
                 response['id:'+str(
                     element)+'_report'] = 'error: the product could not be deleted, please check if the id is correct'
         return Response(response)
+
 
 class ProductSoftDelete(APIView):
     def delete_product_by_pk(self, pk):

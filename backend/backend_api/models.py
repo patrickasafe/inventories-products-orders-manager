@@ -1,6 +1,6 @@
 from django.db import models
 
-from .common.models import TimeStampedModel
+from backend_api.common.models import TimeStampedModel
 
 
 class Supplier(TimeStampedModel):
@@ -22,7 +22,7 @@ class Product(TimeStampedModel):
     cost = models.FloatField(verbose_name='Cost Price')
     price = models.FloatField(verbose_name='Selling Price')
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE,
-                                 verbose_name='Inventory', related_name='inventory_product')
+                                 verbose_name='Inventory', related_name='products')
 
     def __str__(self):
         return str(self.id)
@@ -49,8 +49,6 @@ class Order(TimeStampedModel):
     date_shipment = models.DateTimeField(null=True, blank=True)
     products = models.ManyToManyField(
         Product, related_name='orders', through='OrderProduct')
-    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE,
-                                 verbose_name='Supplier', related_name='orders', default=1)
 
     def __str__(self):
         return str(self.id)
