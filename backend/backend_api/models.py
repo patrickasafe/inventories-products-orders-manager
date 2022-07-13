@@ -22,7 +22,7 @@ class Product(TimeStampedModel):
     cost = models.FloatField(verbose_name='Cost Price')
     price = models.FloatField(verbose_name='Selling Price')
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE,
-                                 verbose_name='Inventory', related_name='products')
+                                 verbose_name='Supplier', related_name='products')
 
     def __str__(self):
         return str(self.id)
@@ -48,7 +48,7 @@ class Order(TimeStampedModel):
     date_order = models.DateTimeField(auto_now_add=True)
     date_shipment = models.DateTimeField(null=True, blank=True)
     products = models.ManyToManyField(
-        Product, related_name='orders', through='OrderProduct')
+        Product, related_name='orders', through='OrderProduct', verbose_name='Products')
 
     def __str__(self):
         return str(self.id)

@@ -37,13 +37,4 @@ class InventoryFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: "Loja %03d" % n)
     ref = factory.Sequence(lambda n: "RAN%06d" % n)
     address = factory.faker.Faker('address')
-    # products
-
-    # @factory.post_generation
-    # def products(self, create, extracted, **kwargs):
-    #     if not create:
-    #         return
-
-    #     if extracted:
-    #         for product in extracted:
-    #             self.products.add(product)
+    

@@ -6,5 +6,5 @@ class Command(CustomBaseCommand):
 
     created_object = 'supplier'
     created_object_plural = 'suppliers'
-    default_quantity = 0
+    default_quantity = 10
     Factory = SupplierFactory

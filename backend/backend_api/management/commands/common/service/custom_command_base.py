@@ -1,5 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 
+# TODO ADD OPTIONAL ARGUMENTS
+
 
 class CustomBaseCommand(BaseCommand):
     '''An extended Base command reducing redudancy'''
