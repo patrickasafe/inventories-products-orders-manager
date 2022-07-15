@@ -19,3 +19,14 @@ class FactoryUtils:
         """A function to iterate arrays to combinate values"""
 
         return [" ".join(element) for element in product(*args)]
+
+
+#It's not necessary, since factory.fuzzy.Fi
+    # @classmethod
+    # def count_until(cls, l_number: int):
+    #     """A counter function generating a int list"""
+
+    #     result = []
+    #     for _ in range(1, l_number+1):
+    #         result.append(_)
+    #     return result
