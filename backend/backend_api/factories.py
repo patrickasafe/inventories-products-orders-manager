@@ -1,4 +1,3 @@
-import datetime
 import factory
 from factory import fuzzy
 
@@ -36,7 +35,7 @@ class InventoryFactory(factory.django.DjangoModelFactory):
         model = models.Inventory
 
     name = factory.Sequence(lambda n: "Estoque %03d" % n)
-    ref = factory.Sequence(lambda n: "RAN%06d" % n)
+    ref = factory.Sequence(lambda n: "RAN%03d" % n)
     address = factory.faker.Faker('address')
 
 
@@ -55,5 +54,14 @@ class InventoryProductFactory(factory.django.DjangoModelFactory):
         model = models.InventoryProduct
 
     inventory = factory.Iterator(models.Inventory.objects.all())
+    product = factory.Iterator(models.Product.objects.all())
+    quantity = fuzzy.FuzzyInteger(10, 200, 5)
+
+
+class OrderProductFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.OrderProduct
+
+    order = factory.Iterator(models.Order.objects.all())
     product = factory.Iterator(models.Product.objects.all())
     quantity = fuzzy.FuzzyInteger(10, 200, 5)

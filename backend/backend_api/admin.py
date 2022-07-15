@@ -23,6 +23,8 @@ class Inventories(admin.ModelAdmin):
     list_per_page = 20
 
 
+
+
 class ProductsInventories(admin.ModelAdmin):
     list_display = ('inventory', 'product', 'quantity')
     # list_display_links = ('id',)
