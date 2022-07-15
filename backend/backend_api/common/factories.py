@@ -1,5 +1,8 @@
+import datetime
 import random
 from itertools import product
+
+from pytz import UTC
 
 
 class FactoryUtils:
@@ -20,8 +23,18 @@ class FactoryUtils:
 
         return [" ".join(element) for element in product(*args)]
 
+    @classmethod
+    def min_date_time_generator(cls, min_year: int):
+        """A function that returns a DateTime used as parameter for fuzzy.FuzzyDateTime(). """
 
-#It's not necessary, since factory.fuzzy.Fi
+        min_time = datetime.datetime(min_year, 1, 1, tzinfo=UTC)
+
+        if datetime.datetime.now(tz=UTC) <= min_time:
+            return ValueError
+        return min_time
+
+
+# It's not necessary, since factory.fuzzy.Fi
     # @classmethod
     # def count_until(cls, l_number: int):
     #     """A counter function generating a int list"""

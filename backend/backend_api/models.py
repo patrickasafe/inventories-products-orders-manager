@@ -45,8 +45,9 @@ class Inventory(TimeStampedModel):
 class Order(TimeStampedModel):
     """A model class for Orders to inventory replenishment."""
 
-    date_order = models.DateTimeField(auto_now_add=True)
-    date_shipment = models.DateTimeField(null=True, blank=True)
+    date_order = models.DateTimeField(verbose_name='Order Date')
+    date_shipment = models.DateTimeField(
+        null=True, blank=True, verbose_name='Shipment Date')
     products = models.ManyToManyField(
         Product, related_name='orders', through='OrderProduct', verbose_name='Products')
 
