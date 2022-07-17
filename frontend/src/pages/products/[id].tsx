@@ -5,6 +5,8 @@ import styles from "../../styles/Home.module.css";
 import { useProducts } from "../../components/EnchancedTable/hooks/useProducts";
 import { CreateProductForms } from "../../components/CreateProduct";
 
+// TODO ADD A PRODUCT EDIT COMPONENT
+
 const Products: NextPage = () => {
 
   return (

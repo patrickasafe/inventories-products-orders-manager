@@ -32,14 +32,21 @@ export interface EnhancedTableToolbarProps {
   numSelected: number;
 }
 
-export interface Product {
+export type Product = {
   id: number;
   name?: string;
   ref?: string;
   cost?: number;
   price?: number;
-  amount?: number;
-  location?: string;
+  supplier?: string;
+}
+
+export type Inventory = {
+  id: number;
+  name?: string;
+  ref?: string;
+  address?: number;
+  supplier?: string;
 }
 
 export type NewProduct = Omit<Product, 'id'>

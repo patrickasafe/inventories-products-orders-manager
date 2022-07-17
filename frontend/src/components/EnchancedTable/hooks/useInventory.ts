@@ -1,35 +1,31 @@
+import React from "react";
 import { useQuery } from "react-query";
 
 import { axiosInstance } from "../../../axiosInstance";
 import { queryKeys } from "../../../react-query/constants";
-import { Inventory as TInventory } from "../utils/interfaces";
+import { Inventory } from "../utils/interfaces";
 
-async function getInventory(): Promise<UseInventory> {
-  const { data } = await axiosInstance.get("inventory/");
+
+async function getInventory(): Promise<Inventory[]> {
+  const { data } = await axiosInstance.get("inventories/list/");
   return data;
 }
 
 // add the interface of payload
-interface UseInventory {
-  Product[]
-}
+type UseInventoriesPayload = Inventory
 
-interface useDataPayload {
-  inventory: Data[];
-}
-
-export function useData(): useDataPayload {
-  // for filtering staff by treatment
-  const treatData = (data: UseInventory): Data[] => {
-    const treatedData = data.results;
-
-    return treatedData;
-  };
-
+export function useProducts(): [
+  UseInventoriesPayload,
+  React.Dispatch<React.SetStateAction<Inventory[]>>
+] {
   const fallback: [] = [];
-  const { data = fallback } = useQuery(queryKeys.inventory, getInventory);
+  const { data = fallback } = useQuery(queryKeys.inventories, getInventory);
+  const [inventories, setInventories] = React.useState(data);
 
-  const data = treatData(data);
+  React.useEffect(() => {
+    setInventories(data)
 
-  return { inventory: data };
+  }, [data])
+
+  return [inventories, setInventories];
 }
