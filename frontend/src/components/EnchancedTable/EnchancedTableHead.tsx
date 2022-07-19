@@ -9,32 +9,7 @@ import {
 import { Product, EnhancedTableProps, HeadCell } from "./utils/interfaces";
 import { visuallyHidden } from "@mui/utils";
 
-const headCells: readonly HeadCell[] = [
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: true,
-    label: "Product Name",
-  },
-  {
-    id: "ref",
-    numeric: false,
-    disablePadding: false,
-    label: "Reference",
-  },
-  {
-    id: "cost",
-    numeric: true,
-    disablePadding: false,
-    label: "Cost Price ($)",
-  },
-  {
-    id: "price",
-    numeric: true,
-    disablePadding: false,
-    label: "Selling Price ($)",
-  },
-];
+
 
 export function EnhancedTableHead(props: EnhancedTableProps) {
   const {
@@ -44,6 +19,7 @@ export function EnhancedTableHead(props: EnhancedTableProps) {
     numSelected,
     rowCount,
     onRequestSort,
+    headCells,
   } = props;
   const createSortHandler =
     (property: keyof Product) => (event: React.MouseEvent<unknown>) => {

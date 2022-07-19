@@ -26,6 +26,7 @@ export interface EnhancedTableProps {
   order: Order;
   orderBy: string;
   rowCount: number;
+  headCells: HeadCell[];
 }
 
 export interface EnhancedTableToolbarProps {
@@ -46,7 +47,6 @@ export type Inventory = {
   name?: string;
   ref?: string;
   address?: number;
-  supplier?: string;
 }
 
 export type NewProduct = Omit<Product, 'id'>
