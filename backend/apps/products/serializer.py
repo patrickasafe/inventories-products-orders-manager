@@ -1,7 +1,7 @@
 from django.forms import ValidationError
 from rest_framework import serializers
-from apps.products.validators import validate_name
-from apps.products.models import Order, Product, Inventory, Supplier
+from apps.common.validators import validate_name
+from apps.products.models import Product, Supplier
 
 
 class SupplierSerializer(serializers.ModelSerializer):
@@ -23,15 +23,3 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def get_description(self, data):
         return "This crop is called " + data['name'] + ", it costs $" + str(data.cost) + " and is sold for $" + (data.price)
-
-
-class InventorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Inventory
-        fields = "__all__"
-
-
-class OrderSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Order
-        fields = "__all__"

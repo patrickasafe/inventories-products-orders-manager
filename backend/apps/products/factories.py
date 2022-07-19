@@ -30,38 +30,3 @@ class ProductFactory(factory.django.DjangoModelFactory):
     supplier = factory.Iterator(models.Supplier.objects.all())
 
 
-class InventoryFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = models.Inventory
-
-    name = factory.Sequence(lambda n: "Estoque %03d" % n)
-    ref = factory.Sequence(lambda n: "RAN%03d" % n)
-    address = factory.faker.Faker('address')
-
-
-class OrderFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = models.Order
-
-    date_order = fuzzy.FuzzyDateTime(
-        FactoryUtils.min_date_time_generator(2017))
-    date_shipment = fuzzy.FuzzyDateTime(
-        FactoryUtils.min_date_time_generator(2017))
-
-
-class InventoryProductFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = models.InventoryProduct
-
-    inventory = factory.Iterator(models.Inventory.objects.all())
-    product = factory.Iterator(models.Product.objects.all())
-    quantity = fuzzy.FuzzyInteger(10, 200, 5)
-
-
-class OrderProductFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = models.OrderProduct
-
-    order = factory.Iterator(models.Order.objects.all())
-    product = factory.Iterator(models.Product.objects.all())
-    quantity = fuzzy.FuzzyInteger(10, 200, 5)

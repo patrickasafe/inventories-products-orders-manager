@@ -1,5 +1,5 @@
 from apps.products.factories import ProductFactory
-from apps.products.management.commands.common.service.custom_command_base import CustomBaseCommand
+from apps.common.service.custom_command_base import CustomBaseCommand
 
 
 class Command(CustomBaseCommand):

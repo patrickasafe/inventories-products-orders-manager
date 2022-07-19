@@ -11,9 +11,6 @@ class ProductList(APIView):
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
-    def post(self, request):
-        serializer = ProductSerializer(data=request.data)
-        # if serializer.is_valid():
 
 
 class ProductCreate(APIView):

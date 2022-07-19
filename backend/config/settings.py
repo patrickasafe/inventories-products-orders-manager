@@ -59,6 +59,9 @@ THIRD_PARTY_APPS = [
 # Apps created by me
 LOCAL_APPS = [
     'apps.products',
+    'apps.orders',
+    'apps.inventories',
+
 ]
 
 # Application definition
