@@ -10,18 +10,21 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
-import { Product, Order } from "./utils/interfaces";
+import { Product, Order, HeadCell } from "./utils/interfaces";
 import { EnhancedTableHead } from "./EnchancedTableHead";
 import { EnhancedTableToolbar } from "./EnchancedToolbar";
 import { getComparator, stableSort } from "./utils/comparators";
 import { CreateProductForms } from "../CreateProduct";
+import { TempleBuddhist } from "@mui/icons-material";
 
 export default function EnhancedTable({
   data,
   setData,
+  headCells,
 }: {
   data: Product[];
   setData: React.Dispatch<React.SetStateAction<Product[]>>;
+  headCells: HeadCell[];
 }) {
   // console.log(data)
   const rows = data;
@@ -103,6 +106,7 @@ export default function EnhancedTable({
           size={dense ? "small" : "medium"}
         >
           <EnhancedTableHead
+            headCells={headCells}
             numSelected={selected.length}
             order={order}
             orderBy={orderBy}
@@ -116,13 +120,13 @@ export default function EnhancedTable({
             {stableSort(rows, getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
-                const isItemSelected = isSelected(row.name);
+                const isItemSelected = isSelected(row['name']);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
                   <TableRow
                     hover
-                    onClick={(e) => handleClick(e, row.name)}
+                    onClick={(e) => handleClick(e, row['name'])}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
@@ -138,17 +142,13 @@ export default function EnhancedTable({
                         }}
                       />
                     </TableCell>
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
-                    >
-                      {row.name}
-                    </TableCell>
-                    <TableCell align="right">{row.ref}</TableCell>
-                    <TableCell align="right">{row.cost}</TableCell>
-                    <TableCell align="right">{row.price}</TableCell>
+
+                    {headCells.map((headCell, index) => {
+                      return <TableCell component="th"
+                        id={labelId} //need to check this
+                        scope="row"
+                        padding="none" key={`row${row.id}.${index}`} align="right">{row[headCell.id]}</TableCell>
+                    })}
                   </TableRow>
                 );
               })}
@@ -182,6 +182,6 @@ export default function EnhancedTable({
         productsList={rows}
         setProductsList={setRows}
       ></CreateProductForms>
-    </Box>
+    </Box >
   );
 }

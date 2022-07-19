@@ -1,14 +1,8 @@
-import { url } from "inspector";
-import Image from "next/image";
 import ButtonAppBar from "../ButtonAppBar";
+import { Page } from "./PageInterface";
 
-const pages = [
-  { page: "Home", link: "/" },
-  { page: "Products", link: "/products" },
-  { page: "Inventory", link: "/inventory" },
-];
 
-export const Layout = ({ children }: { children: any }) => {
+export const Layout = ({ children, pages }: { children: any; pages: Page[]}) => {
   return (
     <>
       <ButtonAppBar menuPages={pages} />
