@@ -14,7 +14,7 @@ class SupplierFactory(factory.django.DjangoModelFactory):
 
     name = fuzzy.FuzzyChoice(
         choices=FactoryUtils.random_name_generator(FactoryOptions.suppliers_names, FactoryOptions.suppliers_ajectives))
-    phone = factory.Sequence(lambda n: "+552198%07d" % n)
+    phone = factory.Sequence(lambda n: "+55219%08d" % n)
     email = factory.faker.Faker('email')
 
 
@@ -28,5 +28,3 @@ class ProductFactory(factory.django.DjangoModelFactory):
     cost = fuzzy.FuzzyFloat(1, 50, 2)
     price = fuzzy.FuzzyFloat(51, 100, 2)
     supplier = factory.Iterator(models.Supplier.objects.all())
-
-

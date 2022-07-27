@@ -15,7 +15,6 @@ import { EnhancedTableHead } from "./EnchancedTableHead";
 import { EnhancedTableToolbar } from "./EnchancedToolbar";
 import { getComparator, stableSort } from "./utils/comparators";
 import { CreateProductForms } from "../CreateProduct";
-import { TempleBuddhist } from "@mui/icons-material";
 
 export default function EnhancedTable({
   data,

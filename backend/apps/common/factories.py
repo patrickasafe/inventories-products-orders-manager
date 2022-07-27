@@ -33,6 +33,9 @@ class FactoryUtils:
             return ValueError
         return min_time
 
+    # class Meta:
+    #     abstract = True
+
 
 # It's not necessary, since factory.fuzzy.Fi
     # @classmethod

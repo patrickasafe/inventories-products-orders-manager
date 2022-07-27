@@ -1,10 +1,11 @@
-from apps.orders.views import OrderCreate, OrderList, OrderDetail, OrderDeleteRequest
+from apps.orders.views import OrderCreateAPIView, OrderListAPIView, OrderRetrieveUpdateAPIView, OrderMultipleDestroyRequestAPIView
 from django.urls import path
 
+app_name = "orders"
 urlpatterns = [
-    path('', OrderCreate.as_view()),
-    path('list/', OrderList.as_view()),
-    path('<int:pk>', OrderDetail.as_view()),
-    path('delete-request/', OrderDeleteRequest.as_view())
+    path('', OrderCreateAPIView.as_view()),
+    path('list/', OrderListAPIView.as_view()),
+    path('<int:pk>', OrderRetrieveUpdateAPIView.as_view()),
+    path('delete-request/', OrderMultipleDestroyRequestAPIView.as_view())
 
 ]

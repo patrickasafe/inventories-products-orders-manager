@@ -7,19 +7,20 @@ from apps.products.models import Product, Supplier
 class SupplierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Supplier
-        fields = "__all__"
+        fields = ['id', 'name', 'phone', 'email']
 
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = "__all__"
+        fields = ['id', 'name', 'ref', 'cost', 'price', 'supplier']
 
+    #TODO FIX THIS VALIDATION
     def validate(self, data):
-        if not validate_name(data['name']):
-            raise ValidationError(
-                {'name': 'The name must not contain numbers'})
+        # if validate_name(data['name']):
+        #     raise ValidationError(
+        #         {'name': 'The name must not contain numbers'})
         return data
 
     def get_description(self, data):
-        return "This crop is called " + data['name'] + ", it costs $" + str(data.cost) + " and is sold for $" + (data.price)
+        return "This crop is called " + data.name + ", it costs $" + str(data.cost) + " and is sold for $" + (data.price)

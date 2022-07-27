@@ -31,6 +31,7 @@ export interface EnhancedTableProps {
 
 export interface EnhancedTableToolbarProps {
   numSelected: number;
+  title: string;
 }
 
 export type Product = {

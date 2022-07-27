@@ -35,3 +35,6 @@ class CustomBaseCommand(BaseCommand):
                     f'Could not create {self.created_object_plural}')
             self.stdout.write(self.style.SUCCESS(
                 f'Successfully created {quantity} {self.created_object_plural}'))
+
+    class Meta:
+        abstract = True

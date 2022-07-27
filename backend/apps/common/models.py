@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.products.managers import SoftDeleteManager
+from apps.common.managers import SoftDeleteManager
 
 
 class TimeStampedModel(models.Model):

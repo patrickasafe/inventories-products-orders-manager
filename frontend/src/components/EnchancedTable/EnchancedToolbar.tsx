@@ -5,7 +5,7 @@ import { EnhancedTableToolbarProps } from "./utils/interfaces";
 
 
 export const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
-  const { numSelected } = props;
+  const { numSelected, title } = props;
 
   return (
     <Toolbar
@@ -37,7 +37,7 @@ export const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          {title}
         </Typography>
       )}
       {numSelected > 0 ? (

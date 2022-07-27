@@ -4,7 +4,7 @@ from apps.common.models import TimeStampedModel
 
 
 class Supplier(TimeStampedModel):
-    """A model class for Supliers."""
+    """A model class for Suppliers."""
 
     name = models.CharField(max_length=45, verbose_name='Name')
     phone = models.CharField(max_length=15, verbose_name='Phone Number')
