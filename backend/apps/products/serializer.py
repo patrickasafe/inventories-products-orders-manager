@@ -1,6 +1,4 @@
-from django.forms import ValidationError
 from rest_framework import serializers
-from apps.common.validators import validate_name
 from apps.products.models import Product, Supplier
 
 
