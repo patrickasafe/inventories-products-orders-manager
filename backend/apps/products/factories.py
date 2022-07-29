@@ -3,7 +3,7 @@ from factory import fuzzy
 
 from apps.common.factories import FactoryUtils
 
-from apps.common.configs import FactoryOptions
+from apps.common.factories_options import FactoryOptions
 
 from . import models
 

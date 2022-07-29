@@ -1,12 +1,16 @@
 import factory
 import pytest
 import json
+
 from django.test import Client, TestCase
 from django.urls import reverse
+
+from apps.common.test_utils import TestCustomUtils
 
 from apps.products.models import Supplier, Product
 
 from apps.products.factories import ProductFactory, SupplierFactory
+
 
 supplier_create_url = reverse('products:create_supplier')
 supplier_list_url = reverse('products:list_suppliers')
@@ -108,14 +112,14 @@ class TestProduct(TestCase):
     #     self.assertEqual(Product.objects.count(), 3)
 
 
-# @pytest.mark.django_db
-# def test_product_create():
-#     client = Client()
-#     SupplierFactory._get_or_create(Supplier)
-#     product = content = factory.build(dict, FACTORY_CLASS=ProductFactory)
-#     response = client.post(product_create_url, product)
-#     data = json.loads(response.content)
-#     data.pop('id')
-#     # data.supplier = content["supplier"]
-#     assert response.status_code == 201
-#     assert data == content
+@pytest.mark.django_db
+def test_product_create():
+    client = Client()
+    SupplierFactory._get_or_create(Supplier)
+    product = content = factory.build(dict, FACTORY_CLASS=ProductFactory)
+    response = client.post(product_create_url, product)
+    data = json.loads(response.content)
+    TestCustomUtils.fix_id_assertion(data, content)
+    TestCustomUtils.fix_fk_assertion(data, content, ["supplier", "id"])
+    assert response.status_code == 201
+    assert data == content
