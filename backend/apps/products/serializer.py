@@ -15,11 +15,8 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ['id', 'name', 'ref', 'cost', 'price', 'supplier']
 
-    #TODO FIX THIS VALIDATION
+    #TODO IMPROVE THIS VALIDATION
     def validate(self, data):
-        # if validate_name(data['name']):
-        #     raise ValidationError(
-        #         {'name': 'The name must not contain numbers'})
         return data
 
     def get_description(self, data):
