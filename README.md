@@ -28,7 +28,7 @@ ____________
 | **Serializer** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | **Factory** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | **Populate Command** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Tests** |  | ✓ | ✓ | ✓ |  | ✓ |
+| **Tests** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 ____________
 ### FRONTEND OVERALL PROGRESS:
 ____________
@@ -46,11 +46,14 @@ ____________
 - **[✓]** Configurate Docker and .env file
 - **[✓]** Configurate dockerfile to use requirements.txt
 - **[✓]** Create a populate.sh script for populate DB using factories
-- **[PARTIALLY]** Create tests for views and serializers.
+- **[✓]** Create tests for views and serializers.
+- **[ ]** Implement update view and tests for models
+
 
 ### FRONTEND TO DO:
 
 - **[✓]** Configurate Docker and .env file
+- **[ ]** Implement update component and hook
 
 
 ## IMPORTANT THINGS TO DO
