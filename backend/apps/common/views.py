@@ -66,7 +66,6 @@ class CustomSoftDeleteAPIView(generics.UpdateAPIView):
     pass
 
 
-# TODO ADD SOFTDELETE METHOD
 class CustomRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     # def get_inventory_by_pk(self, pk):
     #     try:

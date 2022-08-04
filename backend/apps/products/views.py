@@ -5,9 +5,8 @@ from apps.common.views import CustomMultipleDestroyRequestAPIView, CustomRetriev
 from apps.products.models import Product, Supplier
 from apps.products.serializer import ProductSerializer, SupplierSerializer
 
+
 # Product
-
-
 class ProductListAPIView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
