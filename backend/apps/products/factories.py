@@ -13,7 +13,7 @@ class SupplierFactory(factory.django.DjangoModelFactory):
         model = models.Supplier
 
     name = fuzzy.FuzzyChoice(
-        choices=FactoryUtils.random_name_generator(FactoryOptions.suppliers_names, FactoryOptions.suppliers_ajectives))
+        choices=FactoryUtils.random_name_generator(FactoryOptions.suppliers_names, FactoryOptions.suppliers_adjectives))
     phone = factory.Sequence(lambda n: "+55219%08d" % n)
     email = factory.faker.Faker('email')
 

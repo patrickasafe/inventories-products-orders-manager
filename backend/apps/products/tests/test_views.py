@@ -8,7 +8,6 @@ from django.urls import reverse
 from apps.common.test_utils import TestCustomUtils
 
 from apps.products.models import Supplier, Product
-
 from apps.products.factories import ProductFactory, SupplierFactory
 
 
@@ -33,13 +32,12 @@ class TestSupplier(APITestCase):
 
     def test_list(self):
         response = self.client.get(supplier_list_url)
-
-        self.assertContains(response, self.data_supplier_01['name'])
-        self.assertContains(response, self.data_supplier_02['name'])
+        data = json.loads(response.content)
+        assert self.data_supplier_01['name'] in str(data)
+        assert self.data_supplier_02['name'] in str(data)
         assert Supplier.objects.count() == 2
 
     def test_detail(self):
-
         response = self.client.get(self.get_update_delete_url)
         data = json.loads(response.content)
         content = self.data_supplier_01
@@ -61,20 +59,21 @@ class TestProduct(APITestCase):
 
     def setUp(self):
         self.Factory = ProductFactory
-        self.supplier_01 = SupplierFactory._get_or_create(Supplier)
+        self.supplier = SupplierFactory._get_or_create(Supplier)
         self.data_product_01 = factory.build(
-            dict, FACTORY_CLASS=self.Factory, supplier=self.supplier_01)
+            dict, FACTORY_CLASS=self.Factory, supplier=self.supplier)
         self.product_01 = self.Factory(**self.data_product_01)
         self.data_product_02 = factory.build(
-            dict, FACTORY_CLASS=self.Factory, supplier=self.supplier_01)
+            dict, FACTORY_CLASS=self.Factory, supplier=self.supplier)
         self.product_02 = self.Factory(**self.data_product_02)
         self.get_update_delete_url = reverse(
             'products:get_update_delete_product', kwargs={'pk': self.product_01.id})
 
     def test_list(self):
         response = self.client.get(product_list_url)
-        self.assertContains(response, self.data_product_01['name'])
-        self.assertContains(response, self.data_product_02['name'])
+        data = json.loads(response.content)
+        assert self.data_product_01['name'] in str(data)
+        assert self.data_product_02['name'] in str(data)
         assert Product.objects.count() == 2
 
     def test_detail(self):
@@ -85,9 +84,9 @@ class TestProduct(APITestCase):
         TestCustomUtils.fix_fk_assertion(data, content, ["supplier"])
         assert data == content
 
-    def test_product_create(self):
-        SupplierFactory._get_or_create(Supplier)
-        product = content = factory.build(dict, FACTORY_CLASS=self.Factory)
+    def test_create(self):
+        product = content = factory.build(
+            dict, FACTORY_CLASS=self.Factory, supplier=self.supplier)
         response = self.client.post(product_create_url, product)
         data = json.loads(response.content)
         TestCustomUtils.fix_id_assertion(data, content)

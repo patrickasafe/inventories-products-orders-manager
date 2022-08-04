@@ -14,3 +14,12 @@ class TestCustomUtils:
          when the object is created, so the object returned by factory.build() 
          miss this attribute'''
         content['id'] = data['id']
+
+    @classmethod
+    def serializer_fields_mapper(cls, serializer, instance_dict):
+        result = {}
+        fields = serializer.Meta.fields
+        for field in fields:
+            temp = instance_dict[str(field)]
+            result[field] = temp
+        return result

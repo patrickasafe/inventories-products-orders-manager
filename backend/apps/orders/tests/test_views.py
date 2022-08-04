@@ -1,125 +1,115 @@
 import factory
-import pytest
 import json
 
-from django.test import Client, TestCase
+from rest_framework.test import APITestCase
+
 from django.urls import reverse
 
 from apps.common.test_utils import TestCustomUtils
 
-from apps.products.models import Supplier, Product
+from apps.orders.models import Order, OrderProduct
+from apps.orders.factories import OrderFactory, OrderProductFactory
 
 from apps.products.factories import ProductFactory, SupplierFactory
 
 
-supplier_create_url = reverse('products:create_supplier')
-supplier_list_url = reverse('products:list_suppliers')
-product_create_url = reverse('products:create_product')
-product_list_url = reverse('products:list_products')
+order_create_url = reverse('orders:create_order')
+order_list_url = reverse('orders:list_orders')
+order_product_create_url = reverse('orders:create_order_product')
+order_product_list_url = reverse('orders:list_orders_products')
 
 
-class TestSupplier(TestCase):
+# TODO: WRITE A METHOD TO TEST SOFTDELETE
+# TODO: WRITE A METHOD TO TEST UPDATE
+class TestOrder(APITestCase):
+
+    def setUp(self):
+        self.Factory = OrderFactory
+
+        self.data_order_01 = factory.build(dict, FACTORY_CLASS=self.Factory)
+        self.order_01 = self.Factory(**self.data_order_01)
+
+        self.data_order_02 = factory.build(dict, FACTORY_CLASS=self.Factory)
+        self.order_02 = self.Factory(**self.data_order_02)
+
+        self.get_update_delete_url = reverse(
+            'orders:get_update_delete_order', kwargs={'pk': self.order_01.id})
+
+    # TODO: create a convert_date_from_factory_format_to_response_format function. Can you imagine what does is do??
+    def test_list(self):
+        response = self.client.get(order_list_url)
+        data = json.loads(response.content)
+        # assert self.order_01['ship'] in str(data)
+        # assert self.order_02['ship'] in str(data)
+        assert Order.objects.count() == 2
+
+    def test_detail(self):
+        response = self.client.get(self.get_update_delete_url)
+        data = json.loads(response.content)
+        content = self.data_order_01
+        TestCustomUtils.fix_id_assertion(data, content)
+        # NOTE: this assertion is necessary, because factoryboy return different date format from DB response date format
+        TestCustomUtils.fix_fk_assertion(
+            data, content, ["date_shipment", "date_order", "products"])
+        assert data == content
+
+    def test_create(self):
+        order = content = factory.build(dict, FACTORY_CLASS=OrderFactory)
+        response = self.client.post(order_create_url, order)
+        data = json.loads(response.content)
+        TestCustomUtils.fix_id_assertion(data, content)
+        # NOTE: this assertion is necessary, because factoryboy return different date format from DB response date format
+        TestCustomUtils.fix_fk_assertion(
+            data, content, ["date_shipment", "date_order", "products"])
+        assert response.status_code == 201
+        assert data == content
+
+
+class TestOrderProduct(APITestCase):
 
     def setUp(self):
 
-        self.Factory = SupplierFactory
-        self.supplier_01 = self.Factory(id=1)
-        self.supplier_02 = self.Factory(id=2)
+        self.Factory = OrderProductFactory
+
+        self.supplier = SupplierFactory()
+
+        self.product = ProductFactory(supplier=self.supplier)
+
+        self.order = OrderFactory()
+
+        self.data_order_product_01 = factory.build(
+            dict, FACTORY_CLASS=self.Factory, order=self.order, product=self.product)
+        self.order_product_01 = self.Factory(**self.data_order_product_01)
+
+        self.data_order_product_02 = factory.build(
+            dict, FACTORY_CLASS=self.Factory, order=self.order, product=self.product)
+        self.order_product_02 = self.Factory(**self.data_order_product_02)
 
         self.get_update_delete_url = reverse(
-            'products:get_update_delete_supplier', kwargs={'pk': self.supplier_01.id})
+            'orders:get_update_delete_order_product', kwargs={'pk': self.order_product_01.id})
 
+    # TODO: create a convert_date_from_factory_format_to_response_format function. Can you imagine what does is do??
     def test_list(self):
-        response = self.client.get(supplier_list_url)
-
-        self.assertContains(response, 1)
-        self.assertContains(response, 2)
-        self.assertEqual(Supplier.objects.count(), 2)
+        # response = self.client.get(order_product_list_url)
+        # data = json.loads(response.content)
+        # assert self.order_01['ship'] in str(data)
+        # assert self.order_02['ship'] in str(data)
+        assert OrderProduct.objects.count() == 2
 
     def test_detail(self):
-
         response = self.client.get(self.get_update_delete_url)
         data = json.loads(response.content)
-        content = {'id': self.supplier_01.id, "name": self.supplier_01.name, "phone": self.supplier_01.phone,
-                   "email": self.supplier_01.email}
-        self.assertEqual(data, content)
+        content = self.data_order_product_01
+        TestCustomUtils.fix_id_assertion(data, content)
+        TestCustomUtils.fix_fk_assertion(data, content, ['order', 'product'])
+        assert data == content
 
-    # TODO: WRITE A CREATE TEST IN PYTEST. I CANNOT TEST INSIDE TESTCASE CLASSE BECAUSE THIS BUG BELOW:
-    # https://code.djangoproject.com/ticket/22431
-    # def test_create(self):
-
-    #     supplier = content = factory.build(dict, FACTORY_CLASS=SupplierFactory)
-    #     response = self.client.post(supplier_create_url, supplier)
-    #     data = json.loads(response.content)
-    #     self.assertEqual(response.status_code, 201)
-    #     self.assertEqual(data, content)
-    #     self.assertEqual(Supplier.objects.count(), 3)
-
-    # TODO: WRITE A METHOD TO TEST SOFTDELETE
-    # def test_delete(self):
-
-    #     response = self.client.delete(self.read_update_delete_url)
-    #     self.assertEqual(response.status_code, 204)
-    #     self.assertEqual(Supplier.objects.count(), 1)
-
-
-@pytest.mark.django_db
-def test_supplier_create():
-    client = Client()
-    supplier = content = factory.build(dict, FACTORY_CLASS=SupplierFactory)
-    response = client.post(supplier_create_url, supplier)
-    data = json.loads(response.content)
-    data.pop('id')
-    assert response.status_code == 201
-    assert data == content
-
-
-class TestProduct(TestCase):
-
-    def setUp(self):
-
-        self.Factory = ProductFactory
-        self.supplier_01 = SupplierFactory(id=1)
-        self.product_01 = self.Factory(id=1, supplier=self.supplier_01)
-        self.product_02 = self.Factory(id=2, supplier=self.supplier_01)
-        self.get_update_delete_url = reverse(
-            'products:get_update_delete_product', kwargs={'pk': self.product_01.id})
-
-    def test_list(self):
-        response = self.client.get(product_list_url)
-
-        self.assertContains(response, "RAN")
-        self.assertContains(response, "RAN")
-        self.assertEqual(Product.objects.count(), 2)
-
-    def test_detail(self):
-
-        response = self.client.get(self.get_update_delete_url)
+    def test_create(self):
+        order_product = content = factory.build(
+            dict, FACTORY_CLASS=self.Factory, order=self.order, product=self.product)
+        response = self.client.post(order_product_create_url, order_product)
         data = json.loads(response.content)
-        content = {'id': self.product_01.id, "name": self.product_01.name, "ref": self.product_01.ref,
-                   "cost": self.product_01.cost, "price": self.product_01.price, "supplier": self.supplier_01.id}
-        self.assertEqual(data, content)
-
-    # TODO: WRITE A CREATE TEST IN PYTEST. I CANNOT TEST INSIDE TESTCASE CLASSE BECAUSE THIS BUG BELOW:
-    # https://code.djangoproject.com/ticket/22431
-    # def test_create(self):
-
-    #     product = content = factory.build(dict, FACTORY_CLASS=self.Factory)
-    #     response = self.client.post(supplier_create_url, product)
-    #     data = json.loads(response.content)
-    #     self.assertEqual(response.status_code, 201)
-    #     self.assertEqual(data, content)
-    #     self.assertEqual(Product.objects.count(), 3)
-
-
-@pytest.mark.django_db
-def test_product_create():
-    client = Client()
-    SupplierFactory._get_or_create(Supplier)
-    product = content = factory.build(dict, FACTORY_CLASS=ProductFactory)
-    response = client.post(product_create_url, product)
-    data = json.loads(response.content)
-    TestCustomUtils.fix_id_assertion(data, content)
-    TestCustomUtils.fix_fk_assertion(data, content, ["supplier", "id"])
-    assert response.status_code == 201
-    assert data == content
+        TestCustomUtils.fix_id_assertion(data, content)
+        TestCustomUtils.fix_fk_assertion(data, content, ["order", "product"])
+        assert response.status_code == 201
+        assert data == content
