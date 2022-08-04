@@ -11,8 +11,8 @@ class Inventory(TimeStampedModel):
     ref = models.CharField(max_length=6, verbose_name='Reference')
     address = models.CharField(
         max_length=200, verbose_name='Address')
-    products = models.ManyToManyField(Product,
-                                      related_name='inventories', through="InventoryProduct", verbose_name='Products')
+    products = models.ManyToManyField(
+        Product, related_name='inventories', through="InventoryProduct", verbose_name='Products')
 
     def __str__(self):
         return str(self.id)

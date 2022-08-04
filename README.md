@@ -4,7 +4,7 @@ This is a personal project aiming to improve my Django/Python and React/Typescri
 
 ## **INSTALLATION PATH**
 
-1. Download the zip, or type: git clone https://github.com/patrickasafe/inventories-products-orders-manager.git
+1. Download the zip or type: git clone https://github.com/patrickasafe/inventories-products-orders-manager.git
 
 2. Just open the projects root folder with VSCode, press [CTRL + Shift + P] and click on "Remote-Containers: Reopen in Container"
 
@@ -28,20 +28,16 @@ ____________
 | **Serializer** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | **Factory** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | **Populate Command** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Tests** |  | ✓ | ✓ |  |  |  |
+| **Tests** |  | ✓ | ✓ | ✓ |  | ✓ |
 ____________
 ### FRONTEND OVERALL PROGRESS:
 ____________
 |  | **Inventory** | **Supplier** | **Product** | **Order** | **InventoryProduct** | **OrderProduct** |
 |---|---|---|---|---|---|---|
-| **App** | inventory | product | product | order | inventory | order |
-| **Model** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Views** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **URLs** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Serializer** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Factory** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Populate Command** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Tests** |  | ✓ | ✓ |  |  |  |
+| **Table** |  |  | ✓ |  |  |  |
+| **Hooks** |  |  | ✓ |  |  |  |
+| **URLs** |  |  | ✓ |  |  |  |
+| **Tests** |  |  |  |  |  |  |
 ____________
 ## **TO DO**
 
@@ -50,9 +46,12 @@ ____________
 - **[✓]** Configurate Docker and .env file
 - **[✓]** Configurate dockerfile to use requirements.txt
 - **[✓]** Create a populate.sh script for populate DB using factories
-
-
 - **[PARTIALLY]** Create tests for views and serializers.
+
+### FRONTEND TO DO:
+
+- **[✓]** Configurate Docker and .env file
+
 
 ## IMPORTANT THINGS TO DO
 
