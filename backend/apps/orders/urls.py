@@ -13,13 +13,13 @@ urlpatterns = [
          name='destroy_multiple_orders'),
 
     # ORDER_PRODUCT URLs
-    path('order/', OrderProductCreateAPIView.as_view(),
+    path('order-product/', OrderProductCreateAPIView.as_view(),
          name='create_order_product'),
-    path('order/list/', OrderProductListAPIView.as_view(),
+    path('order-product/list/', OrderProductListAPIView.as_view(),
          name='list_orders_products'),
-    path('order/<int:pk>', OrderProductRetrieveUpdateAPIView.as_view(),
+    path('order-product/<int:pk>', OrderProductRetrieveUpdateAPIView.as_view(),
          name='get_update_delete_order_product'),
-    path('order/delete-request/', OrderProductMultipleDestroyRequestAPIView.as_view(),
+    path('order-product/delete-request/', OrderProductMultipleDestroyRequestAPIView.as_view(),
          name='destroy_multiple_orders_products'),
 
 ]

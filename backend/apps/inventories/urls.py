@@ -3,7 +3,7 @@ from django.urls import path
 
 app_name = "inventories"
 urlpatterns = [
-     
+
     # Inventory
     path('', InventoryCreateAPIView.as_view(), name='create_inventory'),
     path('list/', InventoryListAPIView.as_view(), name='list_inventories'),
@@ -13,13 +13,13 @@ urlpatterns = [
          name='destroy_multiple_inventories'),
 
     # InventoryProduct
-    path('', InventoryProductCreateAPIView.as_view(),
+    path('inventory-product/', InventoryProductCreateAPIView.as_view(),
          name='create_inventory_product'),
-    path('list/', InventoryProductListAPIView.as_view(),
+    path('inventory-product/list/', InventoryProductListAPIView.as_view(),
          name='list_inventories_products'),
-    path('<int:pk>', InventoryProductRetrieveUpdateAPIView.as_view(),
+    path('inventory-product/<int:pk>', InventoryProductRetrieveUpdateAPIView.as_view(),
          name='get_update_delete_inventory_product'),
-    path('delete-request/', InventoryProductMultipleDestroyRequestAPIView.as_view(),
+    path('inventory-product/delete-request/', InventoryProductMultipleDestroyRequestAPIView.as_view(),
          name='destroy_multiple_inventories_products'),
 
 ]
