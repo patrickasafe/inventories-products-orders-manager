@@ -43,8 +43,8 @@ ____________
 
 ### BACKEND TO DO:
 
-- **[✓]** Configurate Docker and .env file
-- **[✓]** Configurate dockerfile to use requirements.txt
+- **[✓]** Configure Docker and .env file
+- **[✓]** Configure dockerfile to use requirements.txt
 - **[✓]** Create a populate.sh script for populate DB using factories
 - **[✓]** Create tests for views and serializers.
 - **[ ]** Implement update view and tests for models
@@ -52,7 +52,7 @@ ____________
 
 ### FRONTEND TO DO:
 
-- **[✓]** Configurate Docker and .env file
+- **[✓]** Configure Docker and .env file
 - **[ ]** Implement update component and hook
 
 
