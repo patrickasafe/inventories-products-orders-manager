@@ -10,18 +10,18 @@ class BuyingOrderFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.BuyingOrder
 
-    date_order = fuzzy.FuzzyDateTime(
+    order_date = fuzzy.FuzzyDateTime(
         FactoryUtils.min_date_time_generator(2017))
-    date_shipment = fuzzy.FuzzyDateTime(
+    shipment_date = fuzzy.FuzzyDateTime(
         FactoryUtils.min_date_time_generator(2017))
 
 class SellingOrderFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.SellingOrder
 
-    date_order = fuzzy.FuzzyDateTime(
+    order_date = fuzzy.FuzzyDateTime(
         FactoryUtils.min_date_time_generator(2017))
-    date_shipment = fuzzy.FuzzyDateTime(
+    shipment_date = fuzzy.FuzzyDateTime(
         FactoryUtils.min_date_time_generator(2017))
 
 
