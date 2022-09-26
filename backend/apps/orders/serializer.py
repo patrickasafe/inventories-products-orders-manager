@@ -1,14 +1,24 @@
 from rest_framework import serializers
-from apps.orders.models import Order, OrderProduct
+from apps.orders.models import BuyingOrder, SellingOrder, BuyingOrderProduct,  SellingOrderProduct
 
 
-class OrderSerializer(serializers.ModelSerializer):
+class BuyingOrderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Order
-        fields = ["id", "date_order", "date_shipment", "products"]
+        model = BuyingOrder
+        fields = ["id", "order_date", "shipment_date", "products"]
 
-
-class OrderProductSerializer(serializers.ModelSerializer):
+class SellingOrderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = OrderProduct
-        fields = ["id", "order", "product", "quantity"]
+        model = SellingOrder
+        fields = ["id", "order_date", "shipment_date", "products"]
+
+
+class BuyingOrderProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BuyingOrderProduct
+        fields = ["id", "buying_order", "product", "quantity"]
+
+class SellingOrderProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SellingOrderProduct
+        fields = ["id", "selling_order", "product", "quantity"]

@@ -54,6 +54,7 @@ DEFAULT_APPS = [
 # Apps from libs
 THIRD_PARTY_APPS = [
     'rest_framework',
+    'django_extensions'
 ]
 
 # Apps created by me

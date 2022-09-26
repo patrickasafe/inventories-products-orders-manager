@@ -6,9 +6,18 @@ from apps.common.factories import FactoryUtils
 from . import models
 
 
-class OrderFactory(factory.django.DjangoModelFactory):
+class BuyingOrderFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = models.Order
+        model = models.BuyingOrder
+
+    date_order = fuzzy.FuzzyDateTime(
+        FactoryUtils.min_date_time_generator(2017))
+    date_shipment = fuzzy.FuzzyDateTime(
+        FactoryUtils.min_date_time_generator(2017))
+
+class SellingOrderFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.SellingOrder
 
     date_order = fuzzy.FuzzyDateTime(
         FactoryUtils.min_date_time_generator(2017))
@@ -16,10 +25,18 @@ class OrderFactory(factory.django.DjangoModelFactory):
         FactoryUtils.min_date_time_generator(2017))
 
 
-class OrderProductFactory(factory.django.DjangoModelFactory):
+class BuyingOrderProductFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = models.OrderProduct
+        model = models.BuyingOrderProduct
 
-    order = factory.Iterator(models.Order.objects.all())
+    buying_order = factory.Iterator(models.BuyingOrder.objects.all())
+    product = factory.Iterator(models.Product.objects.all())
+    quantity = fuzzy.FuzzyInteger(10, 200, 5)
+
+class SellingOrderProductFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.SellingOrderProduct
+
+    selling_order = factory.Iterator(models.SellingOrder.objects.all())
     product = factory.Iterator(models.Product.objects.all())
     quantity = fuzzy.FuzzyInteger(10, 200, 5)

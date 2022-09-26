@@ -2,57 +2,107 @@ from rest_framework import generics
 
 from apps.common.views import CustomMultipleDestroyRequestAPIView, CustomRetrieveUpdateAPIView, CustomSoftDeleteAPIView
 
-from apps.orders.serializer import OrderProductSerializer, OrderSerializer
-from apps.orders.models import Order, OrderProduct
+from apps.orders.serializer import BuyingOrderProductSerializer, BuyingOrderSerializer, SellingOrderProductSerializer, SellingOrderSerializer
+from apps.orders.models import BuyingOrder, BuyingOrderProduct, SellingOrder, SellingOrderProduct
 
 
-# Order
-class OrderListAPIView(generics.ListAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+# BuyingOrderViews
+class BuyingOrderListAPIView(generics.ListAPIView):
+    queryset = BuyingOrder.objects.all()
+    serializer_class = BuyingOrderSerializer
 
 
-class OrderCreateAPIView(generics.CreateAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+class BuyingOrderCreateAPIView(generics.CreateAPIView):
+    queryset = BuyingOrder.objects.all()
+    serializer_class = BuyingOrderSerializer
 
 
-class OrderMultipleDestroyRequestAPIView(CustomMultipleDestroyRequestAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+class BuyingOrderMultipleDestroyRequestAPIView(CustomMultipleDestroyRequestAPIView):
+    queryset = BuyingOrder.objects.all()
+    serializer_class = BuyingOrderSerializer
 
 
-class OrderSoftDeleteAPIView(CustomSoftDeleteAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+class BuyingOrderSoftDeleteAPIView(CustomSoftDeleteAPIView):
+    queryset = BuyingOrder.objects.all()
+    serializer_class = BuyingOrderSerializer
 
 
-class OrderRetrieveUpdateAPIView(CustomRetrieveUpdateAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+class BuyingOrderRetrieveUpdateAPIView(CustomRetrieveUpdateAPIView):
+    queryset = BuyingOrder.objects.all()
+    serializer_class = BuyingOrderSerializer
 
 
-# OrderProduct
-class OrderProductListAPIView(generics.ListAPIView):
-    queryset = OrderProduct.objects.all()
-    serializer_class = OrderProductSerializer
+# SellingOrderViews
+class SellingOrderListAPIView(generics.ListAPIView):
+    queryset = SellingOrder.objects.all()
+    serializer_class = SellingOrderSerializer
 
 
-class OrderProductCreateAPIView(generics.CreateAPIView):
-    queryset = OrderProduct.objects.all()
-    serializer_class = OrderProductSerializer
+class SellingOrderCreateAPIView(generics.CreateAPIView):
+    queryset = SellingOrder.objects.all()
+    serializer_class = BuyingOrderSerializer
 
 
-class OrderProductMultipleDestroyRequestAPIView(CustomMultipleDestroyRequestAPIView):
-    queryset = OrderProduct.objects.all()
-    serializer_class = OrderProductSerializer
+class SellingOrderMultipleDestroyRequestAPIView(CustomMultipleDestroyRequestAPIView):
+    queryset = SellingOrder.objects.all()
+    serializer_class = BuyingOrderSerializer
 
 
-class OrderProductSoftDeleteAPIView(CustomSoftDeleteAPIView):
-    queryset = OrderProduct.objects.all()
-    serializer_class = OrderProductSerializer
+class SellingOrderSoftDeleteAPIView(CustomSoftDeleteAPIView):
+    queryset = SellingOrder.objects.all()
+    serializer_class = BuyingOrderSerializer
 
 
-class OrderProductRetrieveUpdateAPIView(CustomRetrieveUpdateAPIView):
-    queryset = OrderProduct.objects.all()
-    serializer_class = OrderProductSerializer
+class SellingOrderRetrieveUpdateAPIView(CustomRetrieveUpdateAPIView):
+    queryset = BuyingOrder.objects.all()
+    serializer_class = BuyingOrderSerializer
+
+# BuyingOrderProductViews
+class BuyingOrderProductListAPIView(generics.ListAPIView):
+    queryset = BuyingOrderProduct.objects.all()
+    serializer_class = BuyingOrderProductSerializer
+
+
+class BuyingOrderProductCreateAPIView(generics.CreateAPIView):
+    queryset = BuyingOrderProduct.objects.all()
+    serializer_class = BuyingOrderProductSerializer
+
+
+class BuyingOrderProductMultipleDestroyRequestAPIView(CustomMultipleDestroyRequestAPIView):
+    queryset = BuyingOrderProduct.objects.all()
+    serializer_class = BuyingOrderProductSerializer
+
+
+class BuyingOrderProductSoftDeleteAPIView(CustomSoftDeleteAPIView):
+    queryset = BuyingOrderProduct.objects.all()
+    serializer_class = BuyingOrderProductSerializer
+
+
+class BuyingOrderProductRetrieveUpdateAPIView(CustomRetrieveUpdateAPIView):
+    queryset = BuyingOrderProduct.objects.all()
+    serializer_class = BuyingOrderProductSerializer
+
+# SellingOrderProductViews
+class SellingOrderProductListAPIView(generics.ListAPIView):
+    queryset = SellingOrderProduct.objects.all()
+    serializer_class = SellingOrderProductSerializer
+
+
+class SellingOrderProductCreateAPIView(generics.CreateAPIView):
+    queryset = SellingOrderProduct.objects.all()
+    serializer_class = SellingOrderProductSerializer
+
+
+class SellingOrderProductMultipleDestroyRequestAPIView(CustomMultipleDestroyRequestAPIView):
+    queryset = SellingOrderProduct.objects.all()
+    serializer_class = SellingOrderProductSerializer
+
+
+class SellingOrderProductSoftDeleteAPIView(CustomSoftDeleteAPIView):
+    queryset = SellingOrderProduct.objects.all()
+    serializer_class = SellingOrderProductSerializer
+
+
+class SellingOrderProductRetrieveUpdateAPIView(CustomRetrieveUpdateAPIView):
+    queryset = SellingOrderProduct.objects.all()
+    serializer_class = SellingOrderProductSerializer
