@@ -12,7 +12,7 @@ from apps.orders.factories import OrderFactory, OrderProductFactory
 
 from apps.products.factories import ProductFactory, SupplierFactory
 
-
+# TODO: REWRITE TESTS FOR NEW TABLES: 
 order_create_url = reverse('orders:create_order')
 order_list_url = reverse('orders:list_orders')
 order_product_create_url = reverse('orders:create_order_product')

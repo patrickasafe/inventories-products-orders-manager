@@ -14,6 +14,10 @@ class Inventory(TimeStampedModel):
     products = models.ManyToManyField(
         Product, related_name='inventories', through="InventoryProduct", verbose_name='Products')
 
+    class Meta:
+        verbose_name = 'inventory'
+        verbose_name_plural = 'inventories'
+
     def __str__(self):
         return str(self.id)
 
@@ -27,3 +31,7 @@ class InventoryProduct(TimeStampedModel):
                                 related_name='inventory_product', verbose_name='Product')
     quantity = models.IntegerField(
         verbose_name='Product quantity at Inventory')
+
+    class Meta:
+        verbose_name = 'inventory product'
+        verbose_name_plural = 'inventory products'

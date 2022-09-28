@@ -29,6 +29,12 @@ def get_env_variable(var_name, default):
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -40,6 +46,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+AUTH_USER_MODEL = 'users.User'
 
 # Apps that came with Django
 DEFAULT_APPS = [
@@ -62,6 +70,7 @@ LOCAL_APPS = [
     'apps.products',
     'apps.orders',
     'apps.inventories',
+    'apps.users',
 
 ]
 
